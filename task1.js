@@ -25,4 +25,7 @@ mybirthday(true)
 }).catch((error)=>{
     console.timeLog("Timer");
     console.log(error);
-});
+}).finally(()=>
+    {
+        console.log("We'll have Party");
+    });

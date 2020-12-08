@@ -7,6 +7,88 @@
 // give the user 1 point, otherwise, give the user 0 points.
 // User story: User can decide to play the game as long as they want to
 
-const start = () => {};
+const Numberuser =() =>
+{
+    return new Promise((resolve,reject)=>
+    {
+        const usernum = Number(window.prompt("Enter a number from 1 to 6 : " ));
+        const randnum = Math.floor(Math.random() * 6 + 1);
+        console.log(randnum);
+
+        if(isNaN(usernum))
+        {
+            reject(new Error('Wrong input type'));
+        }
+
+        if(usernum===randnum)
+        {
+            resolve(
+                {
+                    points:2,
+                    randnum,
+                });
+        }
+        else if(usernum===randnum+1||usernum===randnum-1)
+        {
+            resolve(
+                {
+                    points:1,
+                    randnum,
+                }
+            );
+        }
+        else{
+            resolve(
+                {
+                    points:0,
+                    randnum,
+                }
+            );
+        }
+    });
+};
+
+
+const continuer = ()=>
+{
+    return new Promise((resolve,reject)=>
+    {
+          if(window.confirm("Do you want to continue"))
+          {
+              resolve(true);
+          }
+          else
+          {
+              resolve(false);
+          }
+    });
+};
+
+const handleguess = ()=>
+{
+    Numberuser().then((result)=>
+    {
+        alert(`Dice : ${result.randnum} you got ${result.points} points`);
+
+        continuer().then((result)=>
+        {
+            if(result)
+            {
+                handleguess();
+            }
+            else
+            {
+                alert( `Game ends!!`);
+            }
+
+        });
+    }).catch((error) => alert(error));
+};
+
+const start = () => {
+   handleguess();
+   
+};
 
 start();
+handleguess();
