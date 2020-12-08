@@ -85,10 +85,37 @@ const handleguess = ()=>
     }).catch((error) => alert(error));
 };
 
+
+
+const handleguess_v2 = async ()=>
+{
+    
+    try{
+
+        const result = await Numberuser();
+        alert(`Dice : ${result.randnum} you got ${result.points} points`);
+         const cont = await continuer();
+              if(cont)
+                 {
+                    handleguess_v2();
+                 }
+               else
+                {
+                  alert(`Game ends!!`);
+                }
+
+    }
+    catch(error)
+    {
+        alert(error);
+    }
+  
+}
+
 const start = () => {
-   handleguess();
-   
+   //handleguess();
+    handleguess_v2();
 };
 
 start();
-handleguess();
+
