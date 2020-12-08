@@ -13,3 +13,15 @@ const fetchCountry = async (alpha3Code) => {
     console.log(error);
   }
 };
+
+
+const fetchNeighb = async ()=>
+{
+   const pays = await fetchCountry('col');
+   console.log(pays);
+
+   const neighb = await Promise.all(pays.borders.map(border => fetchCountry(border))); 
+   console.log(neighb);
+}
+
+fetchNeighb();
